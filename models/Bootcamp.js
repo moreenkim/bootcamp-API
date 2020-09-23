@@ -6,13 +6,13 @@ const BootcampSchema = new mongoose.Schema({
     required: [true, 'Please add a name'],
     unique: true,
     trim: true,
-    maxlength: [50, ['Name cannot be more than 50 characters']],
+    maxlength: [50, 'Name can not be more than 50 characters'],
   },
   slug: String,
   description: {
     type: String,
     required: [true, 'Please add a description'],
-    maxlength: [500, ['Description cannot be more than 50 characters']],
+    maxlength: [500, 'Description can not be more than 500 characters'],
   },
   website: {
     type: String,
@@ -23,13 +23,13 @@ const BootcampSchema = new mongoose.Schema({
   },
   phone: {
     type: String,
-    maxlength: [20, 'Number can not be longer than 20 characters'],
+    maxlength: [20, 'Phone number can not be longer than 20 characters'],
   },
   email: {
     type: String,
     match: [
       /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-      'please add a valid email',
+      'Please add a valid email',
     ],
   },
   address: {
@@ -37,15 +37,13 @@ const BootcampSchema = new mongoose.Schema({
     required: [true, 'Please add an address'],
   },
   location: {
-    //geojson
+    // GeoJSON Point
     type: {
       type: String,
       enum: ['Point'],
-      required: true,
     },
     coordinates: {
       type: [Number],
-      required: true,
       index: '2dsphere',
     },
     formattedAddress: String,
@@ -56,10 +54,11 @@ const BootcampSchema = new mongoose.Schema({
     country: String,
   },
   careers: {
+    // Array of strings
     type: [String],
     required: true,
     enum: [
-      'web Development',
+      'Web Development',
       'Mobile Development',
       'UI/UX',
       'Data Science',
@@ -69,13 +68,13 @@ const BootcampSchema = new mongoose.Schema({
   },
   averageRating: {
     type: Number,
-    min: [1, 'Rating ust be atleast 1'],
-    max: [10, 'Rating can not exceed 10'],
+    min: [1, 'Rating must be at least 1'],
+    max: [10, 'Rating must can not be more than 10'],
   },
   averageCost: Number,
   photo: {
     type: String,
-    default: 'no-phot.jpeg',
+    default: 'no-photo.jpg',
   },
   housing: {
     type: Boolean,
@@ -99,4 +98,4 @@ const BootcampSchema = new mongoose.Schema({
   },
 });
 
-module.exports = monoggose.model('Bootcamp', BootcampSchema);
+module.exports = mongoose.model('Bootcamp', BootcampSchema);
