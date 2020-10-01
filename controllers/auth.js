@@ -1,5 +1,5 @@
 const ErrorResponse = require('../utils/errorResponse');
-const path = require('path');
+//const path = require('path');
 const asyncHandler = require('../middleware/async');
 const Bootcamp = require('../models/Bootcamp');
 const User = require('../models/User');
@@ -18,5 +18,8 @@ exports.register = asyncHandler(async (req, res, next) => {
     role,
   });
 
-  res.status(200).json({ success: true });
+  //CCREATE TOKEN
+  const token = user.getSignedJwtToken();
+
+  res.status(200).json({ success: true, token });
 });
