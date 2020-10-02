@@ -18,7 +18,6 @@ exports.register = asyncHandler(async (req, res, next) => {
     role,
   });
 
-  //CCREATE TOKEN
   sendTokenResponse(user, 200, res);
 });
 
